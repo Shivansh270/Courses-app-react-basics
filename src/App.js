@@ -13,10 +13,10 @@ const App = () => {
   const [loading, setLoading] = useState(true)
 
   const fetchData = async() => {
+    setLoading(true) 
     try {
-      setLoading(true)
       const res = await fetch(apiUrl);
-      const opt = res.json();
+      const opt = await res.json();
       // console.log(opt)
       setCourses(opt.data);
 
@@ -31,7 +31,7 @@ const App = () => {
   }, [])
  
   return(
-  <div>
+  <div className="min-h-screen flex flex-col">
     <div>
       <Navbar/>
     </div>
