@@ -3,7 +3,9 @@ import Card from './Card';
 
 const Cards = ({courses}) => {
 
-  console.log(courses)
+  // console.log(courses)
+  let category = props.category;
+  const [likedCourses, setLikedCourses] = useState([]);
  
   function getCourses(){
     let allCourses = [];
