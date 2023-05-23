@@ -11,6 +11,8 @@ const App = () => {
 
   const [courses, setCourses] = useState(null);
   const [loading, setLoading] = useState(true)
+  const [category, setCategory] = useState(filterData[0].title);
+
 
   const fetchData = async() => {
     setLoading(true) 
@@ -19,7 +21,6 @@ const App = () => {
       const opt = await res.json();
       // console.log(opt)
       setCourses(opt.data);
-
     } catch (error) {
       toast.error("something went wrong");
     }
@@ -28,24 +29,29 @@ const App = () => {
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, []);
  
   return(
-  <div className="min-h-screen flex flex-col bg-bgDark2">
+    <div className="min-h-screen flex flex-col bg-bgDark2">
     <div>
       <Navbar/>
     </div>
+    <div className="bg-bgDark2">
+      <div>
+        <Filter 
+        filterData={filterData}
+        />
+      </div>
+      <div className="w-11/12 max-w-[1200px] 
+      mx-auto flex flex-wrap justify-center items-center min-h-[50vh]">
+      {
+          loading ? (<Spinner/>) : (<Cards courses={courses}/>)
+        }
+      </div>
+    </div>
 
-    <div>
-      <Filter filterData={filterData}></Filter>
-    </div>
-    
-    {/* <Cards courses={courses}></Cards> */}
-    <div className="w-11/12 max-w-[1200px] mx-auto flex flex-wrap justify-center items-center min-h-[50vh]">
-      {loading ? (<Spinner></Spinner>) : (<Cards courses={courses}/>)}
-    </div>
 
   </div>
-)};
+  )};
 
 export default App;
