@@ -2,7 +2,9 @@ import React from 'react'
 import Card from './Card';
 import { useState } from 'react';
 
-const Cards = ({courses, category}) => {
+const Cards = (props) => {
+    let courses = props.courses;
+    let category = props.category;
     const [likedCourses, setLikedCourses] = useState([]);
     
     function getCourses() {
@@ -16,6 +18,7 @@ const Cards = ({courses, category}) => {
             return allCourses;
         }
         else {
+            //main sirf specific categiry ka data array krunga  
             return courses[category];      
         }
 
